@@ -60,7 +60,7 @@ export default async function PlacePage({ params }: Props) {
             sizes="100vw"
           />
         ) : (
-          <div className="w-full h-full bg-gray-300 flex items-center justify-center text-6xl">🏞️</div>
+          <div className="w-full h-full bg-gray-300 dark:bg-stone-700 flex items-center justify-center text-6xl">🏞️</div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
@@ -103,12 +103,12 @@ export default async function PlacePage({ params }: Props) {
           {/* Sidebar */}
           <aside className="space-y-6">
             {place.highlights && place.highlights.length > 0 && (
-              <div className="bg-[#FFFBF0] rounded-2xl p-6">
-                <h3 className="font-bold text-lg mb-4 text-[#0D9488]">✨ จุดเด่น</h3>
+              <div className="bg-[#FFFBF0] dark:bg-stone-800 rounded-2xl p-6">
+                <h3 className="font-bold text-lg mb-4 text-[#0D9488] dark:text-teal-400">✨ จุดเด่น</h3>
                 <ul className="space-y-2">
                   {place.highlights.map((h, i) => (
                     <li key={i} className="flex gap-2 text-sm">
-                      <span className="text-[#F97316] font-bold mt-0.5">•</span>
+                      <span className="text-[#F97316] dark:text-orange-400 font-bold mt-0.5">•</span>
                       <span>{h.text}</span>
                     </li>
                   ))}
@@ -117,7 +117,7 @@ export default async function PlacePage({ params }: Props) {
             )}
 
             {place.travelTips && (
-              <div className="bg-white border rounded-2xl p-6">
+              <div className="bg-white dark:bg-stone-800 border dark:border-stone-700 rounded-2xl p-6">
                 <h3 className="font-bold text-lg mb-4">🗺️ เคล็ดลับการเดินทาง</h3>
                 <RichText content={place.travelTips as Record<string, unknown>} className="text-sm" />
               </div>

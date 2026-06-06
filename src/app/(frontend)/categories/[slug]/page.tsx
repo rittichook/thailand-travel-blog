@@ -27,7 +27,7 @@ export default async function CategoryPage({ params }: Props) {
         <h1 className="text-4xl font-bold mb-2">
           {category.icon} {category.name}
         </h1>
-        <p className="text-gray-500">{places.length} สถานที่</p>
+        <p className="text-gray-500 dark:text-stone-400">{places.length} สถานที่</p>
       </div>
 
       {places.length > 0 ? (
@@ -37,7 +37,7 @@ export default async function CategoryPage({ params }: Props) {
           ))}
         </div>
       ) : (
-        <p className="text-gray-500">ยังไม่มีสถานที่ในประเภทนี้</p>
+        <p className="text-gray-500 dark:text-stone-400">ยังไม่มีสถานที่ในประเภทนี้</p>
       )}
     </div>
   )

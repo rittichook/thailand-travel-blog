@@ -34,7 +34,7 @@ export function Gallery({ items }: Props) {
           <button
             key={i}
             onClick={() => setSelected(i)}
-            className="relative aspect-[4/3] overflow-hidden rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+            className="relative aspect-[4/3] overflow-hidden rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#0D9488] dark:focus:ring-teal-400"
             aria-label={`ดูรูปที่ ${i + 1}`}
           >
             {img.url && (
