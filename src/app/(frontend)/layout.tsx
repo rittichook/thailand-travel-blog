@@ -37,9 +37,10 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
       <body>
         <Navbar />
         <main>{children}</main>
-        <footer className="bg-[#1C1917] text-white py-8 mt-16 dark:border-t dark:border-white/10">
-          <div className="container mx-auto px-4 text-center">
-            <p className="text-sm opacity-60">© 2026 เที่ยวทั่วไทย — สงวนลิขสิทธิ์</p>
+        <footer className="border-t border-stone-200 dark:border-stone-800 py-10 mt-16">
+          <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-stone-500 dark:text-stone-400">
+            <p>© 2026 เที่ยวทั่วไทย — สงวนลิขสิทธิ์</p>
+            <p className="text-stone-400 dark:text-stone-500">บทความและรีวิวสถานที่ท่องเที่ยวทั่วประเทศไทย</p>
           </div>
         </footer>
       </body>
