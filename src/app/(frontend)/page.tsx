@@ -39,7 +39,7 @@ export default async function HomePage() {
               {categories.map((cat) => (
                 <Link
                   key={cat.id}
-                  href={`/ประเภท/${cat.slug}`}
+                  href={`/categories/${cat.slug}`}
                   className="flex flex-col items-center gap-2 p-4 rounded-2xl hover:bg-[#FFFBF0] hover:shadow-md transition-all group"
                 >
                   <span className="text-4xl">{cat.icon || '📍'}</span>

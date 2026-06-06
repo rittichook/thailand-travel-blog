@@ -15,10 +15,10 @@ export function Navbar() {
 
         {/* Desktop menu */}
         <div className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <Link href="/ประเภท/ธรรมชาติ" className="hover:text-[#0D9488] transition-colors">ธรรมชาติ</Link>
-          <Link href="/ประเภท/ชายหาด" className="hover:text-[#0D9488] transition-colors">ชายหาด</Link>
-          <Link href="/ประเภท/วัด" className="hover:text-[#0D9488] transition-colors">วัด</Link>
-          <Link href="/ประเภท/วัฒนธรรม" className="hover:text-[#0D9488] transition-colors">วัฒนธรรม</Link>
+          <Link href="/categories/nature" className="hover:text-[#0D9488] transition-colors">ธรรมชาติ</Link>
+          <Link href="/categories/beach" className="hover:text-[#0D9488] transition-colors">ชายหาด</Link>
+          <Link href="/categories/temple" className="hover:text-[#0D9488] transition-colors">วัด</Link>
+          <Link href="/categories/culture" className="hover:text-[#0D9488] transition-colors">วัฒนธรรม</Link>
         </div>
 
         {/* Mobile menu button */}
@@ -37,10 +37,10 @@ export function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div className="md:hidden border-t px-4 py-3 flex flex-col gap-3 text-sm font-medium bg-white">
-          <Link href="/ประเภท/ธรรมชาติ" onClick={() => setOpen(false)}>ธรรมชาติ</Link>
-          <Link href="/ประเภท/ชายหาด" onClick={() => setOpen(false)}>ชายหาด</Link>
-          <Link href="/ประเภท/วัด" onClick={() => setOpen(false)}>วัด</Link>
-          <Link href="/ประเภท/วัฒนธรรม" onClick={() => setOpen(false)}>วัฒนธรรม</Link>
+          <Link href="/categories/nature" onClick={() => setOpen(false)}>ธรรมชาติ</Link>
+          <Link href="/categories/beach" onClick={() => setOpen(false)}>ชายหาด</Link>
+          <Link href="/categories/temple" onClick={() => setOpen(false)}>วัด</Link>
+          <Link href="/categories/culture" onClick={() => setOpen(false)}>วัฒนธรรม</Link>
         </div>
       )}
     </nav>

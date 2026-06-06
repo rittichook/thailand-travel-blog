@@ -1,116 +1,54 @@
-import config from '@/payload.config'
-import { getPayload } from 'payload'
+import {
+  mockPlaces,
+  mockCategories,
+  mockProvinces,
+  type MockPlace,
+  type MockCategory,
+  type MockProvince,
+} from './mockData'
 
-export async function getPayloadClient() {
-  return getPayload({ config: await config })
-}
+// Re-export types for use in components
+export type { MockPlace as Place, MockCategory as Category, MockProvince as Province }
 
 export async function getFeaturedPlaces(limit = 6) {
-  const payload = await getPayloadClient()
-  const result = await payload.find({
-    collection: 'places',
-    where: { status: { equals: 'published' } },
-    limit,
-    sort: '-publishedAt',
-    depth: 2,
-  })
-  return result.docs
+  return mockPlaces.filter((p) => p.status === 'published').slice(0, limit)
 }
 
 export async function getLatestPlaces(limit = 4) {
-  const payload = await getPayloadClient()
-  const result = await payload.find({
-    collection: 'places',
-    where: { status: { equals: 'published' } },
-    limit,
-    sort: '-publishedAt',
-    depth: 2,
-  })
-  return result.docs
+  return mockPlaces
+    .filter((p) => p.status === 'published')
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+    .slice(0, limit)
 }
 
 export async function getPlaceBySlug(slug: string) {
-  const payload = await getPayloadClient()
-  const result = await payload.find({
-    collection: 'places',
-    where: {
-      and: [
-        { slug: { equals: slug } },
-        { status: { equals: 'published' } },
-      ],
-    },
-    depth: 2,
-    limit: 1,
-  })
-  return result.docs[0] ?? null
+  return mockPlaces.find((p) => p.slug === slug && p.status === 'published') ?? null
 }
 
 export async function getAllPlaceSlugs() {
-  const payload = await getPayloadClient()
-  const result = await payload.find({
-    collection: 'places',
-    where: { status: { equals: 'published' } },
-    select: { slug: true },
-    limit: 1000,
-  })
-  return result.docs.map((doc) => doc.slug)
+  return mockPlaces.filter((p) => p.status === 'published').map((p) => p.slug)
 }
 
 export async function getPlacesByProvince(provinceSlug: string) {
-  const payload = await getPayloadClient()
-  const provincesResult = await payload.find({
-    collection: 'provinces',
-    where: { slug: { equals: provinceSlug } },
-    limit: 1,
-  })
-  const province = provincesResult.docs[0]
+  const province = mockProvinces.find((p) => p.slug === provinceSlug) ?? null
   if (!province) return { places: [], province: null }
-
-  const placesResult = await payload.find({
-    collection: 'places',
-    where: {
-      and: [
-        { province: { equals: province.id } },
-        { status: { equals: 'published' } },
-      ],
-    },
-    depth: 2,
-    limit: 100,
-  })
-  return { places: placesResult.docs, province }
+  const places = mockPlaces.filter(
+    (p) => p.status === 'published' && p.province.slug === provinceSlug,
+  )
+  return { places, province }
 }
 
 export async function getPlacesByCategory(categorySlug: string) {
-  const payload = await getPayloadClient()
-  const categoriesResult = await payload.find({
-    collection: 'categories',
-    where: { slug: { equals: categorySlug } },
-    limit: 1,
-  })
-  const category = categoriesResult.docs[0]
+  const category = mockCategories.find((c) => c.slug === categorySlug) ?? null
   if (!category) return { places: [], category: null }
-
-  const placesResult = await payload.find({
-    collection: 'places',
-    where: {
-      and: [
-        { category: { equals: category.id } },
-        { status: { equals: 'published' } },
-      ],
-    },
-    depth: 2,
-    limit: 100,
-  })
-  return { places: placesResult.docs, category }
+  const places = mockPlaces.filter(
+    (p) => p.status === 'published' && p.category.slug === categorySlug,
+  )
+  return { places, category }
 }
 
 export async function getAllCategories() {
-  const payload = await getPayloadClient()
-  const result = await payload.find({
-    collection: 'categories',
-    limit: 50,
-  })
-  return result.docs
+  return mockCategories
 }
 
 export async function getRelatedPlaces(
@@ -118,18 +56,12 @@ export async function getRelatedPlaces(
   provinceId: string | number,
   limit = 3,
 ) {
-  const payload = await getPayloadClient()
-  const result = await payload.find({
-    collection: 'places',
-    where: {
-      and: [
-        { slug: { not_equals: currentSlug } },
-        { province: { equals: provinceId } },
-        { status: { equals: 'published' } },
-      ],
-    },
-    depth: 2,
-    limit,
-  })
-  return result.docs
+  return mockPlaces
+    .filter(
+      (p) =>
+        p.status === 'published' &&
+        p.slug !== currentSlug &&
+        p.province.id === provinceId,
+    )
+    .slice(0, limit)
 }

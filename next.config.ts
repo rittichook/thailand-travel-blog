@@ -7,6 +7,13 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  async rewrites() {
+    return [
+      { source: '/สถานที่/:slug', destination: '/places/:slug' },
+      { source: '/จังหวัด/:slug', destination: '/provinces/:slug' },
+      { source: '/ประเภท/:slug', destination: '/categories/:slug' },
+    ]
+  },
   images: {
     localPatterns: [
       {
@@ -17,6 +24,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: '**.supabase.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
       },
     ],
   },

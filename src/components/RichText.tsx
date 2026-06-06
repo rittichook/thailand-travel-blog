@@ -25,8 +25,7 @@ function renderNode(node: Record<string, unknown>, index: number): React.ReactNo
     case 'paragraph':
       return <p key={index}>{renderedChildren}</p>
     case 'heading': {
-      const tag = node.tag as string
-      const Tag = tag as keyof JSX.IntrinsicElements
+      const Tag = (node.tag as string) as React.ElementType
       return <Tag key={index}>{renderedChildren}</Tag>
     }
     case 'list': {

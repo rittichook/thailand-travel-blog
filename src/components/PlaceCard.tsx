@@ -40,7 +40,7 @@ export function PlaceCard({ place }: Props) {
     : null
 
   return (
-    <Link href={`/สถานที่/${place.slug}`} className="group block">
+    <Link href={`/places/${place.slug}`} className="group block">
       <div className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 bg-white">
         <div className="relative aspect-[4/3] overflow-hidden">
           {coverImage?.url ? (
