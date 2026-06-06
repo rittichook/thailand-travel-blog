@@ -34,7 +34,7 @@ export function Gallery({ items }: Props) {
           <button
             key={i}
             onClick={() => setSelected(i)}
-            className="relative aspect-[4/3] overflow-hidden rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#0D9488] dark:focus:ring-teal-400"
+            className="group relative aspect-[4/3] overflow-hidden rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0D9488] dark:focus:ring-teal-400"
             aria-label={`ดูรูปที่ ${i + 1}`}
           >
             {img.url && (
@@ -42,7 +42,7 @@ export function Gallery({ items }: Props) {
                 src={img.url}
                 alt={img.alt || `รูปที่ ${i + 1}`}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 ease-out group-hover:scale-110 group-hover:opacity-90"
                 sizes="(max-width: 768px) 50vw, 33vw"
               />
             )}
@@ -52,21 +52,21 @@ export function Gallery({ items }: Props) {
 
       {selected !== null && (
         <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setSelected(null)}
           role="dialog"
           aria-modal="true"
           aria-label="ดูรูปขยาย"
         >
           <button
-            className="absolute top-4 right-4 text-white text-3xl font-bold"
+            className="absolute top-4 right-4 text-white text-3xl font-bold transition-transform duration-200 hover:scale-125 hover:rotate-90"
             onClick={() => setSelected(null)}
             aria-label="ปิด"
           >
             ×
           </button>
           {images[selected]?.url && (
-            <div className="relative max-w-4xl max-h-[80vh] w-full h-full">
+            <div key={selected} className="relative max-w-4xl max-h-[80vh] w-full h-full animate-fade-in-up">
               <Image
                 src={images[selected].url!}
                 alt={images[selected].alt || ''}
@@ -77,7 +77,7 @@ export function Gallery({ items }: Props) {
             </div>
           )}
           <button
-            className="absolute left-4 text-white text-4xl font-bold disabled:opacity-30"
+            className="absolute left-4 text-white text-4xl font-bold transition-transform duration-200 enabled:hover:scale-125 enabled:hover:-translate-x-1 disabled:opacity-30"
             onClick={(e) => { e.stopPropagation(); setSelected(Math.max(0, selected - 1)) }}
             disabled={selected === 0}
             aria-label="รูปก่อนหน้า"
@@ -85,7 +85,7 @@ export function Gallery({ items }: Props) {
             ‹
           </button>
           <button
-            className="absolute right-4 text-white text-4xl font-bold disabled:opacity-30"
+            className="absolute right-4 text-white text-4xl font-bold transition-transform duration-200 enabled:hover:scale-125 enabled:hover:translate-x-1 disabled:opacity-30"
             onClick={(e) => { e.stopPropagation(); setSelected(Math.min(images.length - 1, selected + 1)) }}
             disabled={selected === images.length - 1}
             aria-label="รูปถัดไป"

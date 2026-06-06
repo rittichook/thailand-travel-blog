@@ -20,14 +20,31 @@ export function ThemeToggle() {
     } catch {}
   }
 
+  const showSun = mounted && isDark
+
   return (
     <button
       type="button"
       onClick={toggle}
-      className="p-2 rounded-full text-lg leading-none hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
-      aria-label={mounted && isDark ? 'สลับเป็นธีมสว่าง' : 'สลับเป็นธีมมืด'}
+      className="relative p-2 w-9 h-9 rounded-full text-lg leading-none overflow-hidden hover:bg-stone-100 dark:hover:bg-stone-800 hover:scale-110 active:scale-95 transition-all duration-300"
+      aria-label={showSun ? 'สลับเป็นธีมสว่าง' : 'สลับเป็นธีมมืด'}
     >
-      <span aria-hidden="true">{mounted && isDark ? '☀️' : '🌙'}</span>
+      <span
+        aria-hidden="true"
+        className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out ${
+          showSun ? 'opacity-0 -rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'
+        }`}
+      >
+        🌙
+      </span>
+      <span
+        aria-hidden="true"
+        className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out ${
+          showSun ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-50'
+        }`}
+      >
+        ☀️
+      </span>
     </button>
   )
 }

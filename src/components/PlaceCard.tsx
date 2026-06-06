@@ -41,14 +41,14 @@ export function PlaceCard({ place }: Props) {
 
   return (
     <Link href={`/places/${place.slug}`} className="group block">
-      <div className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl dark:shadow-black/30 dark:hover:shadow-black/50 transition-shadow duration-300 bg-white dark:bg-stone-800">
+      <div className="rounded-2xl overflow-hidden shadow-md hover:shadow-2xl dark:shadow-black/30 dark:hover:shadow-black/50 transition-all duration-300 bg-white dark:bg-stone-800 hover:-translate-y-1.5">
         <div className="relative aspect-[4/3] overflow-hidden">
           {coverImage?.url ? (
             <Image
               src={coverImage.url}
               alt={coverImage.alt || place.title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
@@ -56,8 +56,9 @@ export function PlaceCard({ place }: Props) {
               🏞️
             </div>
           )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           {category && (
-            <span className="absolute top-3 left-3 bg-[#0D9488] text-white text-xs font-medium px-2 py-1 rounded-full">
+            <span className="absolute top-3 left-3 bg-[#0D9488] text-white text-xs font-medium px-2 py-1 rounded-full transition-transform duration-300 group-hover:scale-105">
               {category.icon} {category.name}
             </span>
           )}

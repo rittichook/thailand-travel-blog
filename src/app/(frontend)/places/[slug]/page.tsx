@@ -5,6 +5,7 @@ import { getPlaceBySlug, getAllPlaceSlugs, getRelatedPlaces } from '@/lib/payloa
 import { Gallery } from '@/components/Gallery'
 import { PlaceCard } from '@/components/PlaceCard'
 import { RichText } from '@/components/RichText'
+import { Reveal } from '@/components/Reveal'
 
 export const revalidate = 3600
 
@@ -63,7 +64,7 @@ export default async function PlacePage({ params }: Props) {
           <div className="w-full h-full bg-gray-300 dark:bg-stone-700 flex items-center justify-center text-6xl">🏞️</div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+        <div className="absolute bottom-0 left-0 right-0 p-8 text-white animate-fade-in-up">
           <div className="container mx-auto">
             <div className="flex gap-2 mb-3 flex-wrap">
               {category && (
@@ -88,39 +89,47 @@ export default async function PlacePage({ params }: Props) {
           {/* Main content */}
           <div className="lg:col-span-2 space-y-10">
             {place.content && (
-              <RichText content={place.content as Record<string, unknown>} />
+              <Reveal>
+                <RichText content={place.content as Record<string, unknown>} />
+              </Reveal>
             )}
 
             {/* Gallery */}
             {place.gallery && place.gallery.length > 0 && (
-              <section>
-                <h2 className="text-2xl font-bold mb-4">Gallery</h2>
-                <Gallery items={place.gallery as { image: { url?: string; alt?: string } | string | number; id?: string | null }[]} />
-              </section>
+              <Reveal delay={100}>
+                <section>
+                  <h2 className="text-2xl font-bold mb-4">Gallery</h2>
+                  <Gallery items={place.gallery as { image: { url?: string; alt?: string } | string | number; id?: string | null }[]} />
+                </section>
+              </Reveal>
             )}
           </div>
 
           {/* Sidebar */}
           <aside className="space-y-6">
             {place.highlights && place.highlights.length > 0 && (
-              <div className="bg-[#FFFBF0] dark:bg-stone-800 rounded-2xl p-6">
-                <h3 className="font-bold text-lg mb-4 text-[#0D9488] dark:text-teal-400">✨ จุดเด่น</h3>
-                <ul className="space-y-2">
-                  {place.highlights.map((h, i) => (
-                    <li key={i} className="flex gap-2 text-sm">
-                      <span className="text-[#F97316] dark:text-orange-400 font-bold mt-0.5">•</span>
-                      <span>{h.text}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <Reveal delay={150}>
+                <div className="bg-[#FFFBF0] dark:bg-stone-800 rounded-2xl p-6 transition-colors duration-300 hover:shadow-lg dark:hover:shadow-black/30">
+                  <h3 className="font-bold text-lg mb-4 text-[#0D9488] dark:text-teal-400">✨ จุดเด่น</h3>
+                  <ul className="space-y-2">
+                    {place.highlights.map((h, i) => (
+                      <li key={i} className="flex gap-2 text-sm animate-fade-in-up" style={{ animationDelay: `${250 + i * 80}ms` }}>
+                        <span className="text-[#F97316] dark:text-orange-400 font-bold mt-0.5">•</span>
+                        <span>{h.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
             )}
 
             {place.travelTips && (
-              <div className="bg-white dark:bg-stone-800 border dark:border-stone-700 rounded-2xl p-6">
-                <h3 className="font-bold text-lg mb-4">🗺️ เคล็ดลับการเดินทาง</h3>
-                <RichText content={place.travelTips as Record<string, unknown>} className="text-sm" />
-              </div>
+              <Reveal delay={250}>
+                <div className="bg-white dark:bg-stone-800 border dark:border-stone-700 rounded-2xl p-6 transition-colors duration-300 hover:shadow-lg dark:hover:shadow-black/30">
+                  <h3 className="font-bold text-lg mb-4">🗺️ เคล็ดลับการเดินทาง</h3>
+                  <RichText content={place.travelTips as Record<string, unknown>} className="text-sm" />
+                </div>
+              </Reveal>
             )}
           </aside>
         </div>
@@ -128,10 +137,14 @@ export default async function PlacePage({ params }: Props) {
         {/* Related Places */}
         {related.length > 0 && (
           <section className="mt-16">
-            <h2 className="text-2xl font-bold mb-6">สถานที่ใกล้เคียง</h2>
+            <Reveal>
+              <h2 className="text-2xl font-bold mb-6">สถานที่ใกล้เคียง</h2>
+            </Reveal>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {related.map((p) => (
-                <PlaceCard key={p.id} place={p} />
+              {related.map((p, i) => (
+                <Reveal key={p.id} delay={i * 80}>
+                  <PlaceCard place={p} />
+                </Reveal>
               ))}
             </div>
           </section>

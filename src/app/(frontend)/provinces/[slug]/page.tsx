@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getPlacesByProvince } from '@/lib/payload'
 import { PlaceCard } from '@/components/PlaceCard'
+import { Reveal } from '@/components/Reveal'
 
 export const revalidate = 3600
 
@@ -23,15 +24,19 @@ export default async function ProvincePage({ params }: Props) {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <div className="mb-10">
-        <h1 className="text-4xl font-bold mb-2">สถานที่ท่องเที่ยวใน{province.name}</h1>
-        <p className="text-gray-500 dark:text-stone-400">{places.length} สถานที่</p>
-      </div>
+      <Reveal>
+        <div className="mb-10">
+          <h1 className="text-4xl font-bold mb-2">สถานที่ท่องเที่ยวใน{province.name}</h1>
+          <p className="text-gray-500 dark:text-stone-400">{places.length} สถานที่</p>
+        </div>
+      </Reveal>
 
       {places.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {places.map((place) => (
-            <PlaceCard key={place.id} place={place} />
+          {places.map((place, i) => (
+            <Reveal key={place.id} delay={i * 80}>
+              <PlaceCard place={place} />
+            </Reveal>
           ))}
         </div>
       ) : (
