@@ -26,13 +26,13 @@ export default async function HomePage() {
             ))}
           </div>
         ) : (
-          <p className="text-gray-500">ยังไม่มีสถานที่แนะนำ — เพิ่มข้อมูลผ่าน <a href="/admin" className="text-[#0D9488] underline">Admin Panel</a></p>
+          <p className="text-gray-500 dark:text-stone-400">ยังไม่มีสถานที่แนะนำ — เพิ่มข้อมูลผ่าน <a href="/admin" className="text-[#0D9488] dark:text-teal-400 underline">Admin Panel</a></p>
         )}
       </section>
 
       {/* Categories */}
       {categories.length > 0 && (
-        <section className="bg-white py-16">
+        <section className="bg-white dark:bg-stone-900 py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold mb-8">หมวดหมู่</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4">
@@ -40,10 +40,10 @@ export default async function HomePage() {
                 <Link
                   key={cat.id}
                   href={`/categories/${cat.slug}`}
-                  className="flex flex-col items-center gap-2 p-4 rounded-2xl hover:bg-[#FFFBF0] hover:shadow-md transition-all group"
+                  className="flex flex-col items-center gap-2 p-4 rounded-2xl hover:bg-[#FFFBF0] dark:hover:bg-stone-800 hover:shadow-md transition-all group"
                 >
                   <span className="text-4xl">{cat.icon || '📍'}</span>
-                  <span className="text-sm font-medium text-center group-hover:text-[#0D9488]">
+                  <span className="text-sm font-medium text-center group-hover:text-[#0D9488] dark:group-hover:text-teal-400">
                     {cat.name}
                   </span>
                 </Link>
@@ -63,7 +63,7 @@ export default async function HomePage() {
             ))}
           </div>
         ) : (
-          <p className="text-gray-500">ยังไม่มีบทความล่าสุด</p>
+          <p className="text-gray-500 dark:text-stone-400">ยังไม่มีบทความล่าสุด</p>
         )}
       </section>
     </>

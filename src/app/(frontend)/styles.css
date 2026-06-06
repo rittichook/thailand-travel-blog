@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: #0D9488;
   --color-primary-dark: #0F766E;
@@ -10,8 +12,14 @@
   --font-sans: 'Sarabun', sans-serif;
 }
 
+.dark {
+  --color-background: #1C1917;
+  --color-text: #F5F5F4;
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-sans);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }

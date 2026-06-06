@@ -25,7 +25,7 @@ export default async function ProvincePage({ params }: Props) {
     <div className="container mx-auto px-4 py-12">
       <div className="mb-10">
         <h1 className="text-4xl font-bold mb-2">สถานที่ท่องเที่ยวใน{province.name}</h1>
-        <p className="text-gray-500">{places.length} สถานที่</p>
+        <p className="text-gray-500 dark:text-stone-400">{places.length} สถานที่</p>
       </div>
 
       {places.length > 0 ? (
@@ -35,7 +35,7 @@ export default async function ProvincePage({ params }: Props) {
           ))}
         </div>
       ) : (
-        <p className="text-gray-500">ยังไม่มีสถานที่ในจังหวัดนี้</p>
+        <p className="text-gray-500 dark:text-stone-400">ยังไม่มีสถานที่ในจังหวัดนี้</p>
       )}
     </div>
   )

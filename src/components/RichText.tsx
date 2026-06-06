@@ -53,7 +53,7 @@ export function RichText({ content, className }: Props) {
   const children = root.children as Record<string, unknown>[] | undefined
 
   return (
-    <div className={`prose prose-lg max-w-none prose-headings:font-bold prose-a:text-[#0D9488] ${className ?? ''}`}>
+    <div className={`prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-[#0D9488] dark:prose-a:text-teal-400 ${className ?? ''}`}>
       {children?.map((node, i) => renderNode(node, i))}
     </div>
   )
