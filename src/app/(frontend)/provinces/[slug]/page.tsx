@@ -22,20 +22,20 @@ export default async function ProvincePage({ params }: Props) {
   if (!province) notFound()
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="mb-10">
-        <h1 className="text-4xl font-bold mb-2">สถานที่ท่องเที่ยวใน{province.name}</h1>
-        <p className="text-gray-500 dark:text-stone-400">{places.length} สถานที่</p>
+    <div className="container mx-auto px-4 py-14">
+      <div className="mb-12 pb-8 border-b border-stone-200 dark:border-stone-800">
+        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight mb-2">สถานที่ท่องเที่ยวใน{province.name}</h1>
+        <p className="text-stone-500 dark:text-stone-400">{places.length} สถานที่</p>
       </div>
 
       {places.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {places.map((place) => (
             <PlaceCard key={place.id} place={place} />
           ))}
         </div>
       ) : (
-        <p className="text-gray-500 dark:text-stone-400">ยังไม่มีสถานที่ในจังหวัดนี้</p>
+        <p className="text-stone-500 dark:text-stone-400">ยังไม่มีสถานที่ในจังหวัดนี้</p>
       )}
     </div>
   )

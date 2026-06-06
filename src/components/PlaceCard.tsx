@@ -41,33 +41,33 @@ export function PlaceCard({ place }: Props) {
 
   return (
     <Link href={`/places/${place.slug}`} className="group block">
-      <div className="rounded-2xl overflow-hidden shadow-md hover:shadow-xl dark:shadow-black/30 dark:hover:shadow-black/50 transition-shadow duration-300 bg-white dark:bg-stone-800">
+      <div className="overflow-hidden rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 transition-colors group-hover:border-stone-300 dark:group-hover:border-stone-700">
         <div className="relative aspect-[4/3] overflow-hidden">
           {coverImage?.url ? (
             <Image
               src={coverImage.url}
               alt={coverImage.alt || place.title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
-            <div className="w-full h-full bg-gray-200 dark:bg-stone-700 flex items-center justify-center text-4xl">
+            <div className="w-full h-full bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-4xl">
               🏞️
             </div>
           )}
           {category && (
-            <span className="absolute top-3 left-3 bg-[#0D9488] text-white text-xs font-medium px-2 py-1 rounded-full">
+            <span className="absolute top-3 left-3 bg-white/90 dark:bg-stone-900/90 backdrop-blur text-stone-700 dark:text-stone-200 text-xs font-medium px-2.5 py-1 rounded-full">
               {category.icon} {category.name}
             </span>
           )}
         </div>
         <div className="p-4">
-          <h3 className="font-bold text-lg leading-tight mb-1 group-hover:text-[#0D9488] dark:group-hover:text-teal-400 transition-colors">
+          <h3 className="font-medium leading-snug mb-1 group-hover:text-[#0D9488] dark:group-hover:text-teal-400 transition-colors">
             {place.title}
           </h3>
           {province && (
-            <p className="text-sm text-gray-500 dark:text-stone-400">📍 {province.name}</p>
+            <p className="text-sm text-stone-500 dark:text-stone-400">{province.name}</p>
           )}
         </div>
       </div>

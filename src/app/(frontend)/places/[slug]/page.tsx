@@ -49,7 +49,7 @@ export default async function PlacePage({ params }: Props) {
   return (
     <article>
       {/* Hero */}
-      <div className="relative h-[60vh] min-h-[400px]">
+      <div className="relative h-[56vh] min-h-[380px]">
         {coverImage?.url ? (
           <Image
             src={coverImage.url}
@@ -60,33 +60,33 @@ export default async function PlacePage({ params }: Props) {
             sizes="100vw"
           />
         ) : (
-          <div className="w-full h-full bg-gray-300 dark:bg-stone-700 flex items-center justify-center text-6xl">🏞️</div>
+          <div className="w-full h-full bg-stone-200 dark:bg-stone-800 flex items-center justify-center text-6xl">🏞️</div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 px-4 pb-10">
           <div className="container mx-auto">
-            <div className="flex gap-2 mb-3 flex-wrap">
+            <div className="flex gap-2 mb-4 flex-wrap">
               {category && (
-                <span className="bg-[#0D9488] text-white text-sm px-3 py-1 rounded-full">
+                <span className="bg-white/15 backdrop-blur border border-white/20 text-white text-xs px-3 py-1 rounded-full">
                   {category.icon} {category.name}
                 </span>
               )}
               {province && (
-                <span className="bg-white/20 backdrop-blur text-white text-sm px-3 py-1 rounded-full">
-                  📍 {province.name}
+                <span className="bg-white/15 backdrop-blur border border-white/20 text-white text-xs px-3 py-1 rounded-full">
+                  {province.name}
                 </span>
               )}
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold drop-shadow-lg">{place.title}</h1>
+            <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-white">{place.title}</h1>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-14">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main content */}
-          <div className="lg:col-span-2 space-y-10">
+          <div className="lg:col-span-2 space-y-12">
             {place.content && (
               <RichText content={place.content as Record<string, unknown>} />
             )}
@@ -94,7 +94,7 @@ export default async function PlacePage({ params }: Props) {
             {/* Gallery */}
             {place.gallery && place.gallery.length > 0 && (
               <section>
-                <h2 className="text-2xl font-bold mb-4">Gallery</h2>
+                <h2 className="text-xl font-semibold tracking-tight mb-4">แกลเลอรี</h2>
                 <Gallery items={place.gallery as { image: { url?: string; alt?: string } | string | number; id?: string | null }[]} />
               </section>
             )}
@@ -103,12 +103,12 @@ export default async function PlacePage({ params }: Props) {
           {/* Sidebar */}
           <aside className="space-y-6">
             {place.highlights && place.highlights.length > 0 && (
-              <div className="bg-[#FFFBF0] dark:bg-stone-800 rounded-2xl p-6">
-                <h3 className="font-bold text-lg mb-4 text-[#0D9488] dark:text-teal-400">✨ จุดเด่น</h3>
-                <ul className="space-y-2">
+              <div className="rounded-xl border border-stone-200 dark:border-stone-800 p-6">
+                <h3 className="font-medium mb-4">จุดเด่น</h3>
+                <ul className="space-y-3">
                   {place.highlights.map((h, i) => (
-                    <li key={i} className="flex gap-2 text-sm">
-                      <span className="text-[#F97316] dark:text-orange-400 font-bold mt-0.5">•</span>
+                    <li key={i} className="flex gap-3 text-sm text-stone-600 dark:text-stone-300">
+                      <span className="text-[#0D9488] dark:text-teal-400 mt-0.5">—</span>
                       <span>{h.text}</span>
                     </li>
                   ))}
@@ -117,8 +117,8 @@ export default async function PlacePage({ params }: Props) {
             )}
 
             {place.travelTips && (
-              <div className="bg-white dark:bg-stone-800 border dark:border-stone-700 rounded-2xl p-6">
-                <h3 className="font-bold text-lg mb-4">🗺️ เคล็ดลับการเดินทาง</h3>
+              <div className="rounded-xl border border-stone-200 dark:border-stone-800 p-6">
+                <h3 className="font-medium mb-4">เคล็ดลับการเดินทาง</h3>
                 <RichText content={place.travelTips as Record<string, unknown>} className="text-sm" />
               </div>
             )}
@@ -127,9 +127,9 @@ export default async function PlacePage({ params }: Props) {
 
         {/* Related Places */}
         {related.length > 0 && (
-          <section className="mt-16">
-            <h2 className="text-2xl font-bold mb-6">สถานที่ใกล้เคียง</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <section className="mt-20 pt-14 border-t border-stone-200 dark:border-stone-800">
+            <h2 className="text-2xl font-semibold tracking-tight mb-8">สถานที่ใกล้เคียง</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               {related.map((p) => (
                 <PlaceCard key={p.id} place={p} />
               ))}
